@@ -1,0 +1,191 @@
+\documentclass[11pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{multicol}
+\usepackage{enumitem}
+\usepackage{titlesec}
+\usepackage{helvet}
+\renewcommand{\familydefault}{\sfdefault}
+\usepackage{hyperref}
+\titleformat{\section}{\large\bfseries}{}{0em}{}[\titlerule]
+\titlespacing{\section}{0pt}{0.5em}{0.25em}
+\setlength{\parskip}{0.2em}
+\setlength{\parindent}{0em}
+\setlist[itemize]{noitemsep, topsep=0pt, left=1em}
+\usepackage[none]{hyphenat}
+\pagenumbering{gobble}
+\usepackage{amsmath}
+
+\vspace*{-2cm}
+\begin{document}
+
+\section{Probability}
+
+\textbf{Intersection and Union:}
+\[
+P(A \cup B) = P(A) + P(B) - P(A \cap B)
+\]
+\[
+P(A \cap B) = P(A)P(B|A) = P(B)P(A|B)
+\]
+
+\textbf{Conditional Probability:}
+\[
+P(A|B) = \dfrac{P(A \cap B)}{P(B)}
+\]
+
+\textbf{Bayes’ Theorem:}
+\[
+P(A|B) = \dfrac{P(B|A)P(A)}{P(B)}
+\]
+
+\textbf{Law of Total Probability:}
+\[
+P(B) = \sum_i P(B|A_i)P(A_i)
+\]
+
+\section{Permutations and Combinations}
+
+\[
+\binom{n}{k} = \dfrac{n!}{k!(n-k)!}
+\]
+
+Permutation: \[
+nP_r = \dfrac{n!}{(n-r)!}
+\]
+
+Combination: \[
+nC_r = \binom{n}{r}
+\]
+
+Distinct permutations:
+\[
+P = \dfrac{n!}{n_1! n_2! \dots n_k!}
+\]
+
+\pagebreak
+
+\section{Bernoulli Distribution}
+
+\textbf{PMF:} \[
+P(X = x) = p^x (1 - p)^{1 - x}, \quad x \in \{0,1\}
+\]
+\textbf{Mean:} $E[X] = p$ \quad
+\textbf{Variance:} $\sigma^2 = p(1 - p)$
+
+\section{Binomial Distribution}
+
+\textbf{PMF:} \[
+P(X = k) = \binom{n}{k} p^k (1 - p)^{n-k}
+\]
+
+\textbf{CDF:}
+\[
+P(X \leq k) = \sum_{k=0}^{\lfloor x \rfloor} \binom{n}{k} p^k (1 - p)^{n-k}
+\]
+
+\textbf{Mean:} $E[X] = np$ \quad
+\textbf{Variance:} $\sigma^2 = np(1 - p)$
+
+\textbf{MGF:} $M_X(t) = ((1 - p) + pe^t)^n$
+
+\vspace{2mm}
+\section{Poisson Distribution}
+
+\textbf{PMF:} \[
+P(X = k) = \dfrac{e^{-\lambda}\lambda^k}{k!}, \quad k = 0, 1, 2, ...
+\]
+\textbf{Mean:} $E[X] = \lambda$ \quad
+\textbf{Variance:} $\sigma^2 = \lambda$
+
+\vspace{2mm}
+\section{Discrete Uniform Distribution}
+
+\textbf{PMF:} \[
+P(X = x_i) = \dfrac{1}{n}, \quad i = 1, 2, ..., n
+\]
+\textbf{Mean:} $E[X] = \dfrac{n + 1}{2}$ \quad
+\textbf{Variance:} $\sigma^2 = \dfrac{n^2 - 1}{12}$
+
+\vspace{2mm}
+\section{Geometric Distribution}
+
+\textbf{PMF:} \[
+P(X = k) = (1 - p)^{k - 1} p, \quad k = 1, 2, ...
+\]
+\textbf{Mean:} $E[X] = \dfrac{1}{p}$ \quad
+\textbf{Variance:} $\sigma^2 = \dfrac{1 - p}{p^2}$
+
+\vspace{2mm}
+\section{Hypergeometric Distribution}
+
+\textbf{PMF:} \[
+P(X = k) = \dfrac{\binom{K}{k}\binom{N - K}{n - k}}{\binom{N}{n}}
+\]
+\textbf{Mean:} $E[X] = n\dfrac{K}{N}$ \quad
+\textbf{Variance:} $\sigma^2 = n\dfrac{K}{N}\frac{N-K}{N}\frac{N-n}{N-1}$
+
+\pagebreak
+
+\vspace{2mm}
+\section{Normal (Gaussian) Distribution}
+
+\textbf{PDF:} \[
+f(x) = \dfrac{1}{\sigma \sqrt{2\pi}} e^{ -\frac{1}{2} \left( \frac{x - \mu}{\sigma} \right)^2 }
+\]
+
+\textbf{Z-Score:} $z = \dfrac{x - \mu}{\sigma}$ \quad
+\textbf{Raw Score:} $x = \mu + z\sigma$
+
+\textbf{Sampling Distribution:}
+\[
+\mu_{\bar{x}} = \mu, \quad
+\sigma_{\bar{x}} = \dfrac{\sigma}{\sqrt{n}}, \quad
+z = \dfrac{\bar{x} - \mu}{\sigma / \sqrt{n}}
+\]
+
+\textbf{Central Limit Theorem:} For large $n$, $\bar{X} \sim N(\mu, \sigma^2/n)$.
+
+\vspace{2mm}
+\section{Exponential Distribution}
+
+\textbf{PDF:} $f(x) = \lambda e^{-\lambda x}, \ x \ge 0$
+\textbf{CDF:} $F(x) = 1 - e^{-\lambda x}$ \\
+\textbf{Mean:} $E[X] = \dfrac{1}{\lambda}$ \quad
+\textbf{Variance:} $\sigma^2 = \dfrac{1}{\lambda^2}$
+
+\vspace{2mm}
+\section{Continuous Uniform Distribution}
+
+\textbf{PDF:} $f(x) = \dfrac{1}{b - a}, \ a \le x \le b$ \\
+\textbf{Mean:} $E[X] = \dfrac{a + b}{2}$ \quad
+\textbf{Variance:} $\sigma^2 = \dfrac{(b - a)^2}{12}$
+
+\vspace{2mm}
+\section{Chi-Square Distribution}
+
+\textbf{PDF:} $f(x) = \dfrac{1}{2^{k/2}\Gamma(k/2)}x^{k/2 - 1} e^{-x/2}$ \\
+\textbf{Mean:} $E[X] = k$ \quad
+\textbf{Variance:} $\sigma^2 = 2k$
+
+\vspace{2mm}
+\section{Student's t-Distribution}
+
+\textbf{PDF:} $f(x) = \dfrac{\Gamma\left(\frac{\nu + 1}{2}\right)}{\sqrt{\nu\pi}\Gamma\left(\frac{\nu}{2}\right)} \left(1 + \frac{x^2}{\nu}\right)^{-(\nu + 1)/2}$ \\
+\textbf{Mean:} $0$ \ (for $\nu > 1$) \quad
+\textbf{Variance:} $\dfrac{\nu}{\nu - 2}$ \ (for $\nu > 2$)
+
+\vspace{2mm}
+\section{Beta Distribution}
+
+\textbf{PDF:} $f(x) = \dfrac{x^{\alpha - 1}(1 - x)^{\beta - 1}}{B(\alpha, \beta)}$ \\
+\textbf{Mean:} $\dfrac{\alpha}{\alpha + \beta}$ \quad
+\textbf{Variance:} $\dfrac{\alpha\beta}{(\alpha + \beta)^2(\alpha + \beta + 1)}$
+
+\vspace{2mm}
+\section{Gamma Distribution}
+
+\textbf{PDF:} $f(x) = \dfrac{1}{\Gamma(k)\theta^k}x^{k - 1} e^{-x/\theta}, \ x \ge 0$ \\
+\textbf{Mean:} $E[X] = k\theta$ \quad
+\textbf{Variance:} $\sigma^2 = k\theta^2$
+
+\end{document}
