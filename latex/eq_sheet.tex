@@ -18,8 +18,8 @@
 \vspace*{-2cm}
 \begin{document}
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Probability}
-
 \textbf{Intersection and Union:}
 \[
 P(A \cup B) = P(A) + P(B) - P(A \cap B)
@@ -64,6 +64,7 @@ P = \dfrac{n!}{n_1! n_2! \dots n_k!}
 
 \pagebreak
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Bernoulli Distribution}
 
 \textbf{PMF:} \[
@@ -88,7 +89,7 @@ P(X \leq k) = \sum_{k=0}^{\lfloor x \rfloor} \binom{n}{k} p^k (1 - p)^{n-k}
 
 \textbf{MGF:} $M_X(t) = ((1 - p) + pe^t)^n$
 
-\vspace{2mm}
+\vspace{4mm}
 \section{Poisson Distribution}
 
 \textbf{PMF:} \[
@@ -97,7 +98,7 @@ P(X = k) = \dfrac{e^{-\lambda}\lambda^k}{k!}, \quad k = 0, 1, 2, ...
 \textbf{Mean:} $E[X] = \lambda$ \quad
 \textbf{Variance:} $\sigma^2 = \lambda$
 
-\vspace{2mm}
+\vspace{4mm}
 \section{Discrete Uniform Distribution}
 
 \textbf{PMF:} \[
@@ -106,7 +107,7 @@ P(X = x_i) = \dfrac{1}{n}, \quad i = 1, 2, ..., n
 \textbf{Mean:} $E[X] = \dfrac{n + 1}{2}$ \quad
 \textbf{Variance:} $\sigma^2 = \dfrac{n^2 - 1}{12}$
 
-\vspace{2mm}
+\vspace{4mm}
 \section{Geometric Distribution}
 
 \textbf{PMF:} \[
@@ -115,7 +116,7 @@ P(X = k) = (1 - p)^{k - 1} p, \quad k = 1, 2, ...
 \textbf{Mean:} $E[X] = \dfrac{1}{p}$ \quad
 \textbf{Variance:} $\sigma^2 = \dfrac{1 - p}{p^2}$
 
-\vspace{2mm}
+\vspace{4mm}
 \section{Hypergeometric Distribution}
 
 \textbf{PMF:} \[
@@ -126,7 +127,7 @@ P(X = k) = \dfrac{\binom{K}{k}\binom{N - K}{n - k}}{\binom{N}{n}}
 
 \pagebreak
 
-\vspace{2mm}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Normal (Gaussian) Distribution}
 
 \textbf{PDF:} \[
@@ -145,7 +146,7 @@ z = \dfrac{\bar{x} - \mu}{\sigma / \sqrt{n}}
 
 \textbf{Central Limit Theorem:} For large $n$, $\bar{X} \sim N(\mu, \sigma^2/n)$.
 
-\vspace{2mm}
+\vspace{4mm}
 \section{Exponential Distribution}
 
 \textbf{PDF:} $f(x) = \lambda e^{-\lambda x}, \ x \ge 0$
@@ -153,35 +154,35 @@ z = \dfrac{\bar{x} - \mu}{\sigma / \sqrt{n}}
 \textbf{Mean:} $E[X] = \dfrac{1}{\lambda}$ \quad
 \textbf{Variance:} $\sigma^2 = \dfrac{1}{\lambda^2}$
 
-\vspace{2mm}
+\vspace{4mm}
 \section{Continuous Uniform Distribution}
 
 \textbf{PDF:} $f(x) = \dfrac{1}{b - a}, \ a \le x \le b$ \\
 \textbf{Mean:} $E[X] = \dfrac{a + b}{2}$ \quad
 \textbf{Variance:} $\sigma^2 = \dfrac{(b - a)^2}{12}$
 
-\vspace{2mm}
+\vspace{4mm}
 \section{Chi-Square Distribution}
 
 \textbf{PDF:} $f(x) = \dfrac{1}{2^{k/2}\Gamma(k/2)}x^{k/2 - 1} e^{-x/2}$ \\
 \textbf{Mean:} $E[X] = k$ \quad
 \textbf{Variance:} $\sigma^2 = 2k$
 
-\vspace{2mm}
+\vspace{4mm}
 \section{Student's t-Distribution}
 
 \textbf{PDF:} $f(x) = \dfrac{\Gamma\left(\frac{\nu + 1}{2}\right)}{\sqrt{\nu\pi}\Gamma\left(\frac{\nu}{2}\right)} \left(1 + \frac{x^2}{\nu}\right)^{-(\nu + 1)/2}$ \\
 \textbf{Mean:} $0$ \ (for $\nu > 1$) \quad
 \textbf{Variance:} $\dfrac{\nu}{\nu - 2}$ \ (for $\nu > 2$)
 
-\vspace{2mm}
+\vspace{4mm}
 \section{Beta Distribution}
 
 \textbf{PDF:} $f(x) = \dfrac{x^{\alpha - 1}(1 - x)^{\beta - 1}}{B(\alpha, \beta)}$ \\
 \textbf{Mean:} $\dfrac{\alpha}{\alpha + \beta}$ \quad
 \textbf{Variance:} $\dfrac{\alpha\beta}{(\alpha + \beta)^2(\alpha + \beta + 1)}$
 
-\vspace{2mm}
+\vspace{4mm}
 \section{Gamma Distribution}
 
 \textbf{PDF:} $f(x) = \dfrac{1}{\Gamma(k)\theta^k}x^{k - 1} e^{-x/\theta}, \ x \ge 0$ \\
