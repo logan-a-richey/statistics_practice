@@ -1,0 +1,104 @@
+\documentclass[11pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{multicol}
+\usepackage{enumitem}
+\usepackage{titlesec}
+\usepackage{helvet}
+\renewcommand{\familydefault}{\sfdefault}
+\usepackage{hyperref}
+\titleformat{\section}{\large\bfseries}{}{0em}{}[\titlerule]
+\titlespacing{\section}{0pt}{0.5em}{0.25em}
+\setlength{\parskip}{0.2em}
+\setlength{\parindent}{0em}
+\setlist[itemize]{noitemsep, topsep=0pt, left=1em}
+\usepackage[none]{hyphenat}
+\pagenumbering{gobble}
+\usepackage{amsmath}
+
+\vspace*{-2cm}
+\begin{document}
+
+\section{Binomial: Mean and Variance from MGF}
+
+\subsection{MGF of Binomial Distribution}
+The moment generating function (MGF) of a binomial distribution is given by:
+\[
+M_X(t) = E[e^{tX}] = \sum_{x=0}^{n} e^{tx} P(X = x)
+\]
+
+We know that
+\[
+P(X = x) = \binom{n}{x} p^x q^{n-x}, \quad \text{where } q = 1 - p
+\]
+Substituting in:
+\[
+M_X(t) = \sum_{x=0}^{n} \binom{n}{x} (pe^t)^x q^{n-x}
+\]
+By the Binomial Theorem, this simplifies to:
+\[
+M_X(t) = (q + pe^t)^n
+\]
+
+\subsection{Raw Moments}
+We can find the first and second raw moments by differentiating the MGF.
+
+\textbf{First moment (mean):}
+\[
+\mu_1' = E[X] = \frac{dM_X(t)}{dt}\bigg|_{t=0}
+\]
+Differentiate:
+\[
+\frac{dM_X(t)}{dt} = n(q + pe^t)^{n-1}(pe^t)
+\]
+Now evaluate at $t = 0$:
+\[
+\mu_1' = np(q + p)^{n-1} = np(1)^{n-1} = np
+\]
+Therefore, the mean is:
+\[
+\boxed{E[X] = np}
+\]
+
+\textbf{Second moment:}
+\[
+\mu_2' = \frac{d^2 M_X(t)}{dt^2}\bigg|_{t=0}
+\]
+Differentiate again:
+\[
+\frac{d^2 M_X(t)}{dt^2} = np \left[ e^t (n-1)(q + pe^t)^{n-2}(pe^t) + e^t (q + pe^t)^{n-1} \right]
+\]
+Simplify and evaluate at $t = 0$:
+\[
+\mu_2' = np \left[ (n-1)p + 1 \right] = n(n-1)p^2 + np
+\]
+
+\subsection{Variance of Binomial Distribution}
+The variance is given by:
+\[
+\sigma^2 = E[X^2] - (E[X])^2 = \mu_2' - (\mu_1')^2
+\]
+Substitute the results:
+\[
+\sigma^2 = \left[ n(n-1)p^2 + np \right] - (np)^2
+\]
+Simplify:
+\[
+\sigma^2 = n(n-1)p^2 + np - n^2p^2 = np(1 - p)
+\]
+Thus,
+\[
+\boxed{\sigma^2 = Var(X) = npq}
+\]
+
+% \pagebreak 
+% \section{Bernoulli: Mean and Variance from MGF}
+
+ %\pagebreak
+% \section{Poisson: Mean and Variance from MGF}
+% \section{Geometric: Mean and Variance from MGF}
+ %\section{HyperGeometric: Mean and Variance from MGF}
+% \section{Rademacher: Mean and Variance from MGF}
+% \section{Negative Binomial: Mean and Variance from MGF}
+% \section{Negative HyperGeometric: Mean and Variance from MGF}
+
+\end{document}
