@@ -23,20 +23,20 @@
 \subsection{MGF of Binomial Distribution}
 The moment generating function (MGF) of a binomial distribution is given by:
 \[
-M_X(t) = E[e^{tX}] = \sum_{x=0}^{n} e^{tx} P(X = x)
+    M_X(t) = E[e^{tX}] = \sum_{x=0}^{n} e^{tx} P(X = x)
 \]
 
 We know that
 \[
-P(X = x) = \binom{n}{x} p^x q^{n-x}, \quad \text{where } q = 1 - p
+    P(X = x) = \binom{n}{x} p^x q^{n-x}, \quad \text{where } q = 1 - p
 \]
 Substituting in:
 \[
-M_X(t) = \sum_{x=0}^{n} \binom{n}{x} (pe^t)^x q^{n-x}
+    M_X(t) = \sum_{x=0}^{n} \binom{n}{x} (pe^t)^x q^{n-x}
 \]
 By the Binomial Theorem, this simplifies to:
 \[
-M_X(t) = (q + pe^t)^n
+    M_X(t) = (q + pe^t)^n
 \]
 
 \subsection{Raw Moments}
@@ -44,50 +44,50 @@ We can find the first and second raw moments by differentiating the MGF.
 
 \textbf{First moment (mean):}
 \[
-\mu_1' = E[X] = \frac{dM_X(t)}{dt}\bigg|_{t=0}
+    \mu_1' = E[X] = \frac{dM_X(t)}{dt}\bigg|_{t=0}
 \]
 Differentiate:
 \[
-\frac{dM_X(t)}{dt} = n(q + pe^t)^{n-1}(pe^t)
+    \frac{dM_X(t)}{dt} = n(q + pe^t)^{n-1}(pe^t)
 \]
 Now evaluate at $t = 0$:
 \[
-\mu_1' = np(q + p)^{n-1} = np(1)^{n-1} = np
+    \mu_1' = np(q + p)^{n-1} = np(1)^{n-1} = np
 \]
 Therefore, the mean is:
 \[
-\boxed{E[X] = np}
+    \boxed{E[X] = np}
 \]
 
 \textbf{Second moment:}
 \[
-\mu_2' = \frac{d^2 M_X(t)}{dt^2}\bigg|_{t=0}
+    \mu_2' = \frac{d^2 M_X(t)}{dt^2}\bigg|_{t=0}
 \]
 Differentiate again:
 \[
-\frac{d^2 M_X(t)}{dt^2} = np \left[ e^t (n-1)(q + pe^t)^{n-2}(pe^t) + e^t (q + pe^t)^{n-1} \right]
+    \frac{d^2 M_X(t)}{dt^2} = np \left[ e^t (n-1)(q + pe^t)^{n-2}(pe^t) + e^t (q + pe^t)^{n-1} \right]
 \]
 Simplify and evaluate at $t = 0$:
 \[
-\mu_2' = np \left[ (n-1)p + 1 \right] = n(n-1)p^2 + np
+    \mu_2' = np \left[ (n-1)p + 1 \right] = n(n-1)p^2 + np
 \]
 
 \subsection{Variance of Binomial Distribution}
 The variance is given by:
 \[
-\sigma^2 = E[X^2] - (E[X])^2 = \mu_2' - (\mu_1')^2
+    \sigma^2 = E[X^2] - (E[X])^2 = \mu_2' - (\mu_1')^2
 \]
 Substitute the results:
 \[
-\sigma^2 = \left[ n(n-1)p^2 + np \right] - (np)^2
+    \sigma^2 = \left[ n(n-1)p^2 + np \right] - (np)^2
 \]
 Simplify:
 \[
-\sigma^2 = n(n-1)p^2 + np - n^2p^2 = np(1 - p)
+    \sigma^2 = n(n-1)p^2 + np - n^2p^2 = np(1 - p)
 \]
 Thus,
 \[
-\boxed{\sigma^2 = Var(X) = npq}
+    \boxed{\sigma^2 = Var(X) = npq}
 \]
 \pagebreak 
 
@@ -134,54 +134,215 @@ Therefore, the variance is: \\
 \subsection{MGF of Poisson Distribution}
 
 The Poisson distribution is discrete, with PMF:
-\[ P(X = x) = \frac{e^{-\lambda}\lambda^x}{x!}, \quad x = 0, 1, 2, \ldots \]
+\[ 
+    P(X = x) = \frac{e^{-\lambda}\lambda^x}{x!}, \quad x = 0, 1, 2, \ldots 
+\]
 
 The moment generating function (MGF) is:
-\[ M_X(t) = E[e^{tX}] = \sum_{x=0}^{\infty} e^{tx} P(X = x) \]
+\[ 
+    M_X(t) = E[e^{tX}] = \sum_{x=0}^{\infty} e^{tx} P(X = x) 
+\]
 
 Substitute the PMF:
-\[ M_X(t) = e^{-\lambda} \sum_{x=0}^{\infty} \frac{(\lambda e^t)^x}{x!} \]
+\[ 
+    M_X(t) = e^{-\lambda} \sum_{x=0}^{\infty} \frac{(\lambda e^t)^x}{x!} 
+\]
 
 Recognize this as the Taylor expansion of $e^{z}$:
-\[ \sum_{x=0}^{\infty} \frac{z^x}{x!} = e^z \]
+\[ 
+    \sum_{x=0}^{\infty} \frac{z^x}{x!} = e^z 
+\]
 
 Thus,
-\[ M_X(t) = e^{-\lambda} \cdot e^{\lambda e^t} = e^{\lambda(e^t - 1)} \]
+\[
+    M_X(t) = e^{-\lambda} \cdot e^{\lambda e^t} = e^{\lambda(e^t - 1)} 
+\]
 
 \subsection{Raw Moments}
 The mean and variance can be derived from derivatives of $M_X(t)$.
 
 \textbf{First moment (mean):}
-\[ E[X] = M_X'(0) \]
+\[ 
+    E[X] = M_X'(0) 
+\]
 
 Differentiate:
-\[ M_X'(t) = \lambda e^t e^{\lambda(e^t - 1)} = \lambda e^t M_X(t) \]
+\[ 
+    M_X'(t) = \lambda e^t e^{\lambda(e^t - 1)} = \lambda e^t M_X(t) 
+\]
 
 Evaluate at $t = 0$:
-\[ E[X] = M_X'(0) = \lambda e^0 M_X(0) = \lambda \]
+\[  
+    E[X] = M_X'(0) = \lambda e^0 M_X(0) = \lambda 
+\]
 
 \textbf{Second moment:}
-\[ M_X''(t) = \frac{d}{dt}[\lambda e^t M_X(t)] = \lambda e^t M_X(t) + \lambda e^t M_X'(t) \]
+\[ 
+    M_X''(t) = \frac{d}{dt}[\lambda e^t M_X(t)] = \lambda e^t M_X(t) + \lambda e^t M_X'(t) 
+\]
 
 Substitute $M_X'(t) = \lambda e^t M_X(t)$:
-\[ M_X''(t) = \lambda e^t M_X(t)[1 + \lambda e^t] \]
+\[ 
+    M_X''(t) = \lambda e^t M_X(t)[1 + \lambda e^t] 
+\]
 
 Evaluate at $t = 0$:
-\[ E[X^2] = M_X''(0) = \lambda(1 + \lambda) \]
+\[ 
+    E[X^2] = M_X''(0) = \lambda(1 + \lambda) 
+\]
 
 \subsection{Variance}
-\[ Var(X) = E[X^2] - (E[X])^2 = [\lambda(1 + \lambda)] - \lambda^2 = \lambda \]
+\[ 
+    Var(X) = E[X^2] - (E[X])^2 = [\lambda(1 + \lambda)] - \lambda^2 = \lambda 
+\]
 
 Thus,
-\[ \boxed{E[X] = \lambda, \quad Var(X) = \lambda} \]
+\[ 
+    \boxed{E[X] = \lambda, \quad Var(X) = \lambda} 
+\]
+
+\pagebreak
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Geometric: Mean and Variance from MGF}
+
+\subsection{MGF}
+TODO
+\subsection{Moments}
+TODO
+\subsection{Variance}
+TODO
+
+\pagebreak
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{HyperGeometric: Mean and Variance from MGF}
+\subsection{MGF}
+TODO
+\subsection{Moments}
+TODO
+\subsection{Variance}
+TODO
+
+\pagebreak
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Negative Binomial: Mean and Variance from MGF}
+\subsection{MGF}
+TODO
+\subsection{Moments}
+TODO
+\subsection{Variance}
+TODO
+
+\pagebreak
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Negative HyperGeometric: Mean and Variance from MGF}
+\subsection{MGF}
+TODO
+\subsection{Moments}
+TODO
+\subsection{Variance}
+TODO
+
+\pagebreak
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Rademacher: Mean and Variance from MGF}
+
+The MGF for a Rademacher distrubtion is:
+\[
+	M(t) = E[e ^ {tX}] = \dfrac{1}{2} e ^ {-t} + \dfrac{1}{2} e ^ t = \cosh(t)
+\] 
+where X is a random variable with $P(X = -1) = P(X = 1) = \dfrac{1}{2}$. \\
+This is because the MGF is the expectation of $e^{tX}$, and for a Rademacher variable, this expectation is calculated by summing over its possible values:
+\[
+	E[e^{tX}] 
+		= e^{t(-1)} \cdot P(X = -1) + e^{t(1)} \cdot P(X = 1)
+		= \dfrac{1}{2}e^{-t} + \dfrac{1}{2} e^{t}
+\]
+The MGF can also be used to find the mean and variance of the Rademacher distribution by taking its derivatives at $t = 0$.
+
+\subsection{Deriving the MGF:}
+The moment-generating function of a random variable $X$ is defined as:
+$ M(t) = E[e^{tX}]$. \\ 
+
+Apply to Rademacher distribution: For a Rademacher variable, the possible values are
+$1$ and $-1$, each with a probability of $\dfrac{1}{2}$. \\ 
+
+Calculate the expectation: Substitute these values into the definition:
+\[
+	M(t) = E[e ^ {tX} ] = \sum\limits_x e^{tX} P(X = x)
+\]
+\[
+	M(t) = e^{t(-1)} P(X = -1) + e^{t(1)}P(X = 1)
+\]
+\[
+	M(t) = e^{-t}(\dfrac{1}{2}) + e^{t}(\dfrac{1}{2})
+\]
+\[
+	M(t) = \dfrac{1}{2} (e^{t} + e^{-1})
+\]
+Note that $\dfrac{e^{t} + e^{-1} }{2}$ is the definition of the hyperbolic cosine function, $\cosh(t)$. Thus, $M(t) = \cosh(t)$. \\
+
+
+\subsection{Using the MGF to find moments}
+\textbf{Mean}: The first derivative of the MGF evaluated at $t=0$ gives the mean.
+\[
+	M'(t) = \dfrac{d}{dt} \cosh(t) = \sinh(t)
+\]
+\[
+	M'(0) = \sinh(0) = 0
+\]
+The mean of the Rademacher distribution is $0$.
+
+\textbf{Variance}: The variance is found using the second derivative.
+\[
+	M''(t) = \dfrac{d}{dt} \sinh(t) = \cosh(t)
+\]
+\[
+	M''(0) = \cosh(0) = 1
+\]
+The variance of the Rademacher distrubution is 1.
 
 \pagebreak
 
-% \section{Geometric: Mean and Variance from MGF}
- %\section{HyperGeometric: Mean and Variance from MGF}
-% \section{Rademacher: Mean and Variance from MGF}
-% \section{Negative Binomial: Mean and Variance from MGF}
-% \section{Negative HyperGeometric: Mean and Variance from MGF}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Zipf Distribution}
+
+The Zipf distribution does not have a MGF, because the series for the MGF does not converge for any interval around zero. 
+While it does not have a MGF, it does have a probability generating function (PGF) defined in terms of the polylogarithm function.
+
+\begin{itemize}
+    \item
+    \textbf{Why the MGF does not exist:} 
+        The definition of the MGF for the Zipf distribution involves an infinite series, and this series does not converge on an open interval that includes $0$. 
+        For a MGF to exist, the series must converge in a neighborhood of $0$.
+    \item
+    \textbf{The PGF exists:}
+        The Zipf distribution does have a probability generating function (PGF), which is defined as $E[z^x]$.
+    \item
+    \textbf{PGF Formula:}
+        The PGF for the Zipf distribution is given by:
+        \begin {center}
+        	$ P(z) = \dfrac{Li_a(z)}{Li_a(1)} $ \quad where $Li_a(z)$ is the polylogarithm function.
+        	\end{center}
+        	
+        
+\end{itemize}
+
+The polylogarithm function is given by:
+\[
+    Li_s(z) = \sum\limits_{n=1}^\infty \dfrac{z^n}{n^s}
+\]
+\[
+    Li_s(z) = \dfrac{1}{ \Gamma(s)} \int_0^\infty \dfrac{t^{s - 1}}{\frac{e^t}{z} - 1} dt
+\]
+
+The Zipf distribution is used often, particularly for analyzing patterns in fields like linguistics, internet traffic, city populations, and economics, where a few high-frequency items dominate a much larger number of low-frequency ones. It's a fundamental concept for understanding how rank and frequency relate in many natural and human-made systems.
+
+\pagebreak
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -216,6 +377,9 @@ TODO
 
 \subsection{Variance}
 TODO 
+
+% \pagebreak
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \end{document}
 
