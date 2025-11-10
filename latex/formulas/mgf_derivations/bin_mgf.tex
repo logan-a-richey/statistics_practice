@@ -89,12 +89,77 @@ Thus,
 \[
 \boxed{\sigma^2 = Var(X) = npq}
 \]
+\pagebreak 
 
-% \pagebreak 
-% \section{Bernoulli: Mean and Variance from MGF}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Bernoulli: Mean and Variance from MGF}
+\subsection{MGF of Bernoulli Distribution}
+Given the moment-generating function (MGF):
+\[
+    M_X(t) = 1 - p + pe^t 
+\]
 
- %\pagebreak
-% \section{Poisson: Mean and Variance from MGF}
+\subsection{Raw Moments}
+Let's find the first moment:
+\[
+    \dfrac{d}{dt} M_X(t) = \dfrac{d}{dt} (1 - p + pe^t) = pe^t
+\]
+\[
+ 	M_X'(0) = pe^0 
+\]
+Therefore, the mean is:
+\[
+    \boxed{E[X] = p}
+\]
+
+Let's find the second moment:
+\[
+    \dfrac{d^2}{dt^2} M_X(t) = \dfrac{d}{dt} (pe^t) = pe^t
+\]
+
+\subsection{Variance of Bernoulli Distribution}
+Let's find the variance: $\sigma^2 = E[X^2] - E[X]^2$. Substituting yields: \\
+\[
+    \sigma^2 = p - p^2 = p(1 - p) = pq
+\]
+Therefore, the variance is: \\
+\[
+	\boxed{\sigma^2 = pq}
+\]
+
+\pagebreak
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Poisson: Mean and Variance from MGF}
+\subsection{MFG of Poisson Distribution}
+\[
+    M_X(t) = E(e^{tx}) = \int_{-\infty}^\infty e^(tx) f_X(x) dx
+\]
+\[
+    M_X(t) = \int_0^\infty e^{tx} \lambda e ^ {-\lambda x } dx 
+\]
+\[
+    M_X(t) = \lambda \int_0^\infty e^{tx - \lambda x} dx 
+        = \lambda \int_0^\infty e^{x ( t - \lambda) } dx 
+\]
+\[
+    M_X(t) = \lambda \dfrac{e^{x(t - \lambda)}}{(t - \lambda)} \bigg|_{0}^\infty
+\]
+\[
+    M_X(t) = \lambda \dfrac{0 -1}{(t - \lambda)}
+\]
+\[
+    M_X{t} = \dfrac{ \lambda } { \lambda - t }
+\]
+
+\subsection{Raw Moments}
+TODO 
+
+\subsection{Variance}
+TODO 
+
+\pagebreak
+
 % \section{Geometric: Mean and Variance from MGF}
  %\section{HyperGeometric: Mean and Variance from MGF}
 % \section{Rademacher: Mean and Variance from MGF}
@@ -102,3 +167,4 @@ Thus,
 % \section{Negative HyperGeometric: Mean and Variance from MGF}
 
 \end{document}
+
