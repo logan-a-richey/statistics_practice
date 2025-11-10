@@ -131,9 +131,67 @@ Therefore, the variance is: \\
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Poisson: Mean and Variance from MGF}
-\subsection{MFG of Poisson Distribution}
+\subsection{MGF of Poisson Distribution}
+
+The Poisson distribution is discrete, with PMF:
+\[ P(X = x) = \frac{e^{-\lambda}\lambda^x}{x!}, \quad x = 0, 1, 2, \ldots \]
+
+The moment generating function (MGF) is:
+\[ M_X(t) = E[e^{tX}] = \sum_{x=0}^{\infty} e^{tx} P(X = x) \]
+
+Substitute the PMF:
+\[ M_X(t) = e^{-\lambda} \sum_{x=0}^{\infty} \frac{(\lambda e^t)^x}{x!} \]
+
+Recognize this as the Taylor expansion of $e^{z}$:
+\[ \sum_{x=0}^{\infty} \frac{z^x}{x!} = e^z \]
+
+Thus,
+\[ M_X(t) = e^{-\lambda} \cdot e^{\lambda e^t} = e^{\lambda(e^t - 1)} \]
+
+\subsection{Raw Moments}
+The mean and variance can be derived from derivatives of $M_X(t)$.
+
+\textbf{First moment (mean):}
+\[ E[X] = M_X'(0) \]
+
+Differentiate:
+\[ M_X'(t) = \lambda e^t e^{\lambda(e^t - 1)} = \lambda e^t M_X(t) \]
+
+Evaluate at $t = 0$:
+\[ E[X] = M_X'(0) = \lambda e^0 M_X(0) = \lambda \]
+
+\textbf{Second moment:}
+\[ M_X''(t) = \frac{d}{dt}[\lambda e^t M_X(t)] = \lambda e^t M_X(t) + \lambda e^t M_X'(t) \]
+
+Substitute $M_X'(t) = \lambda e^t M_X(t)$:
+\[ M_X''(t) = \lambda e^t M_X(t)[1 + \lambda e^t] \]
+
+Evaluate at $t = 0$:
+\[ E[X^2] = M_X''(0) = \lambda(1 + \lambda) \]
+
+\subsection{Variance}
+\[ Var(X) = E[X^2] - (E[X])^2 = [\lambda(1 + \lambda)] - \lambda^2 = \lambda \]
+
+Thus,
+\[ \boxed{E[X] = \lambda, \quad Var(X) = \lambda} \]
+
+\pagebreak
+
+% \section{Geometric: Mean and Variance from MGF}
+ %\section{HyperGeometric: Mean and Variance from MGF}
+% \section{Rademacher: Mean and Variance from MGF}
+% \section{Negative Binomial: Mean and Variance from MGF}
+% \section{Negative HyperGeometric: Mean and Variance from MGF}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Exponential Distribution}
+The exponential distribution can be thought of as a continuous analogue of the Poisson process.
+
+\subsection{MGF of Exponential Distribution}
+The moment generating function of the Exponential distribution is given by:
 \[
-    M_X(t) = E(e^{tx}) = \int_{-\infty}^\infty e^(tx) f_X(x) dx
+    M_X(t) = E(e^{tx}) = \int_{-\infty}^\infty e^{tx} f_X(x) dx
 \]
 \[
     M_X(t) = \int_0^\infty e^{tx} \lambda e ^ {-\lambda x } dx 
@@ -148,8 +206,9 @@ Therefore, the variance is: \\
 \[
     M_X(t) = \lambda \dfrac{0 -1}{(t - \lambda)}
 \]
+Thus, the general form of the moment generating function, in terms of $\lambda$, is:
 \[
-    M_X{t} = \dfrac{ \lambda } { \lambda - t }
+    M_X(t) = \dfrac{ \lambda } { \lambda - t }
 \]
 
 \subsection{Raw Moments}
@@ -157,14 +216,6 @@ TODO
 
 \subsection{Variance}
 TODO 
-
-\pagebreak
-
-% \section{Geometric: Mean and Variance from MGF}
- %\section{HyperGeometric: Mean and Variance from MGF}
-% \section{Rademacher: Mean and Variance from MGF}
-% \section{Negative Binomial: Mean and Variance from MGF}
-% \section{Negative HyperGeometric: Mean and Variance from MGF}
 
 \end{document}
 
