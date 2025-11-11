@@ -87,7 +87,7 @@ Simplify:
 \]
 Thus,
 \[
-    \boxed{\sigma^2 = Var(X) = npq}
+    \boxed{\sigma^2 = \operatorname{Var}(X) = npq}
 \]
 \pagebreak 
 
@@ -193,12 +193,12 @@ Evaluate at $t = 0$:
 
 \subsection{Variance}
 \[ 
-    Var(X) = E[X^2] - (E[X])^2 = [\lambda(1 + \lambda)] - \lambda^2 = \lambda 
+    \operatorname{Var}(X) = E[X^2] - (E[X])^2 = [\lambda(1 + \lambda)] - \lambda^2 = \lambda 
 \]
 
 Thus,
 \[ 
-    \boxed{E[X] = \lambda, \quad Var(X) = \lambda} 
+    \boxed{E[X] = \lambda, \quad \operatorname{Var}(X) = \lambda} 
 \]
 
 \pagebreak
@@ -225,7 +225,7 @@ Therefore, the mean is
 \subsection{Moments}
 The variance can be calculated using:
 \[
-    Var(X) = E[X^2] - E[X]^2
+    \operatorname{Var}(X) = E[X^2] - E[X]^2
 \]
 Finding the second moment, $E[X^2]$:
 \[
@@ -238,7 +238,7 @@ Finding the second moment, $E[X^2]$:
 \subsection{Variance}
 Using the first and second moments, we can find the variance.
 \[
-    Var(X) = \dfrac{1-p}{p^2} - (\dfrac{1}{p})^2 = \dfrac{1-p-1}{p^2} = \dfrac{-p}{p^2} = \dfrac{1-p}{p^2}
+    \operatorname{Var}(X) = \dfrac{1-p}{p^2} - (\dfrac{1}{p})^2 = \dfrac{1-p-1}{p^2} = \dfrac{-p}{p^2} = \dfrac{1-p}{p^2}
 \]
 Therefore, the variance is:
 \[
@@ -248,24 +248,144 @@ Therefore, the variance is:
 \pagebreak
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\section{HyperGeometric: Mean and Variance from MGF}
-\subsection{MGF}
-TODO
-\subsection{Moments}
-TODO
-\subsection{Variance}
-TODO
+\section{HyperGeometric Dist: Mean and Variance (indicator approach) }
+
+\subsection{Setup and PMF}
+Population size $N$, number of success states in the population $K$, drawn sample size $n$ (without replacement). The PMF for $X$ = number of successes in the sample is
+\[
+    P(X = k) = \frac{\binom{K}{k}\binom{N-K}{\,n-k\,}}{\binom{N}{n}}, \qquad
+    \max(0,n-(N-K)) \le k \le \min(n,K).
+\]
+
+\subsection{Mean via indicator variables}
+Label the $n$ draws and define indicator variables
+\[
+    I_j = \begin{cases} 1 & \text{if the $j$-th draw is a success},\\[4pt]
+    0 & \text{otherwise.} \end{cases}
+\]
+
+Then $X=\sum_{j=1}^n I_j$. By linearity of expectation,
+\[
+    E[X] = \sum_{j=1}^n E[I_j].
+\]
+
+Since each draw (before conditioning on the others) has probability $K/N$ of being a success,
+\[
+    E[I_j] = \frac{K}{N} \quad\Rightarrow\quad E[X] = n\frac{K}{N}.
+\]
+
+\[
+    \boxed{E[X] = n\frac{K}{N}}
+\]
+
+\subsection{Variance via covariance}
+Compute variance using pairwise covariance:
+\[
+    \operatorname{Var}(X) = \sum_{j=1}^n \operatorname{Var}(I_j) + 2\sum_{1\le i<j\le n} \operatorname{Cov}(I_i,I_j).
+\]
+
+Let $p=K/N$. For any single indicator,
+\[
+    \operatorname{Var}(I_j) = p(1-p).
+\]
+
+For $i\ne j$, we need $\operatorname{Cov}(I_i,I_j)=E[I_i I_j] - p^2$.
+The joint probability that both $i$ and $j$ are successes equals
+\[
+    P(I_i=1,I_j=1) = \frac{K}{N}\cdot\frac{K-1}{N-1} = p\cdot\frac{K-1}{N-1}.
+\]
+
+Thus
+\[
+    \operatorname{Cov}(I_i,I_j) = p\frac{K-1}{N-1} - p^2
+    = p\left(\frac{K-1}{N-1} - p\right).
+\]
+
+Write $p = \dfrac{K}{N}$; simplifying gives the standard negative covariance:
+\[
+    \operatorname{Cov}(I_i,I_j) = -\frac{p(1-p)}{N-1}.
+\]
+
+Now let's calculuate the variance:
+\[
+    \operatorname{Var}(X) = n\cdot p(1-p) + 2\binom{n}{2}\left(-\frac{p(1-p)}{N-1}\right).
+\]
+
+Simplify the combinatorial term $2\binom{n}{2} = n(n-1)$:
+\[
+    \operatorname{Var}(X) = np(1-p) - \frac{n(n-1)}{N-1}p(1-p)
+    = np(1-p)\left(1 - \frac{n-1}{N-1}\right).
+\]
+
+Finish simplification:
+\[
+    \operatorname{Var}(X) = np(1-p)\cdot\frac{N-n}{N-1}.
+\]
+
+Substitute back $p=\dfrac{K}{N}$:
+\[
+    \boxed{\operatorname{Var}(X) = n\frac{K}{N}\left(1-\frac{K}{N}\right)\frac{N-n}{N-1}}
+\]
+
+which is the standard hypergeometric variance formula.
 
 \pagebreak
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \section{Negative Binomial: Mean and Variance from MGF}
-\subsection{MGF}
-TODO
-\subsection{Moments}
-TODO
-\subsection{Variance}
-TODO
+
+\subsection{First moment and Mean}
+Let's start by finding the mean:
+\[
+	\mu_1' = \dfrac{d}{dt} M_X(t) \bigg|_{t=0} 
+	= \dfrac{d}{dt} \left( \dfrac{p}{1 - qe^t}^r \right) \bigg|_{t=0}
+\]
+\[
+	p^r \dfrac{d}{dt} (1 - qe^t) ^ {-r} \bigg|_{t=0}
+\]
+\[
+	p^r (-r)(1-qe^t)^{-r-1} (-qe^t) \bigg|_{t=0}
+\]
+\[
+	r (p^r) q p^{-r-1}
+\]
+\[
+	\boxed{E[X] =  \dfrac{rq}{p}}
+\]
+
+\subsection{Second moment and Variance}
+\[
+	\mu_2' = \dfrac{d^2}{dt^2} M_X(t) \bigg|_{t=0} 
+	= \dfrac{d	}{dt} \dfrac{d}{dt} \left( \dfrac{p}{1 - qe^t} \right) ^ r \bigg|_{t=0}
+\]
+\[
+	r p^r \dfrac{d}{dt} \left[ (1-qe^t)^{-r-1} e^t \right] \bigg|_{t=0}
+\]
+\[
+	r p^r q \left[ (1 - qe^t) ^ {-r-1} e^t + e^t (-r-1) (1 - qe^t)^{-r-2} \right] \bigg|_{t=0}
+\]
+\[
+	r p^r q[ (p^{-r-1} + (r+1) p^{-r-2} q ]
+\]
+\[
+	r p^r q p^{-r-1} + r p^r q^2 (r + 1) p ^{-r-2}
+\]
+\[
+	\mu_2' = \dfrac{rq}{p} + r(r+1) \dfrac{q^2}{p^2} 
+\]
+\[
+	\mu_2 = \operatorname{Var}(X) = \mu_2' - \mu_1' 
+	= \dfrac{rq}{p} + r(r+1) \dfrac{q^2}{p^2} - \left( \dfrac{rq}{p} \right) ^2
+\]
+\[
+	\dfrac{rq}{p} \left[ [1 + (r+1) \dfrac{q}{p} - \dfrac{rq}{p} \right]
+\]
+\[
+	\dfrac{rq}{p} \left[ \dfrac{p + rq +q - rq}{p} \right]
+\]
+\[
+	\boxed{ \operatorname{Var}(X) = \dfrac{rq}{p^2} }
+\]
 
 \pagebreak
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -379,38 +499,52 @@ The Zipf distribution is used often, particularly for analyzing patterns in fiel
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Exponential Distribution}
-The exponential distribution can be thought of as a continuous analogue of the Poisson process.
+\section{Exponential Distribution: Mean and Variance from MGF}
 
-\subsection{MGF of Exponential Distribution}
-The moment generating function of the Exponential distribution is given by:
+\subsection{PDF and MGF}
+The exponential distribution (rate parameter $\lambda>0$) has PDF
 \[
-    M_X(t) = E(e^{tx}) = \int_{-\infty}^\infty e^{tx} f_X(x) dx
-\]
-\[
-    M_X(t) = \int_0^\infty e^{tx} \lambda e ^ {-\lambda x } dx 
-\]
-\[
-    M_X(t) = \lambda \int_0^\infty e^{tx - \lambda x} dx 
-        = \lambda \int_0^\infty e^{x ( t - \lambda) } dx 
-\]
-\[
-    M_X(t) = \lambda \dfrac{e^{x(t - \lambda)}}{(t - \lambda)} \bigg|_{0}^\infty
-\]
-\[
-    M_X(t) = \lambda \dfrac{0 -1}{(t - \lambda)}
-\]
-Thus, the general form of the moment generating function, in terms of $\lambda$, is:
-\[
-    M_X(t) = \dfrac{ \lambda } { \lambda - t }
+    f_X(x) = \lambda e^{-\lambda x}, \qquad x \ge 0.
 \]
 
-\subsection{Raw Moments}
-TODO 
+Its moment generating function (for $t < \lambda$) is
+\[
+    M_X(t) = E[e^{tX}] = \int_0^\infty e^{tx}\lambda e^{-\lambda x}\,dx
+    = \lambda \int_0^\infty e^{-(\lambda - t)x}\,dx.
+\]
 
-\subsection{Variance}
-TODO 
+Evaluating the integral (geometric/exponential integral):
+\[
+    M_X(t) = \lambda \left[\frac{e^{-(\lambda - t)x}}{-(\lambda - t)}\right]_{0}^{\infty}
+    = \lambda \left( 0 - \frac{1}{-(\lambda - t)} \right)
+    = \frac{\lambda}{\lambda - t}.
+\]
 
+\subsection{Raw moments and variance}
+Differentiate the MGF:
+\[
+    M_X'(t) = \frac{d}{dt}\left(\frac{\lambda}{\lambda - t}\right)
+    = \frac{\lambda}{(\lambda - t)^2},
+    \qquad
+    M_X''(t) = \frac{2\lambda}{(\lambda - t)^3}.
+\]
+
+Evaluate at $t=0$ to get raw moments:
+\[
+    E[X] = M_X'(0) = \frac{\lambda}{\lambda^2} = \frac{1}{\lambda},
+    \qquad
+    E[X^2] = M_X''(0) = \frac{2\lambda}{\lambda^3} = \frac{2}{\lambda^2}.
+\]
+
+Variance:
+\[
+    \operatorname{Var}(X) = E[X^2] - (E[X])^2
+    = \frac{2}{\lambda^2} - \frac{1}{\lambda^2}
+    = \frac{1}{\lambda^2}.
+\]
+\[
+    \boxed{E[X] = \frac{1}{\lambda}, \qquad \operatorname{Var}(X) = \frac{1}{\lambda^2}}
+\]
 
 % \pagebreak
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
