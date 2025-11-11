@@ -44,23 +44,27 @@ P(B) = \sum_i P(B|A_i)P(A_i)
 \]
 
 \section{Permutations and Combinations}
-
+\textbf{Combination}: \\
+Combinations are \textit{with} replacement.
+We say "$n$ choose $r$" when talking about combinations.
 \[
-\binom{n}{k} = \dfrac{n!}{k!(n-k)!}
+_nC_r = \binom{n}{r} = \dfrac{n!}{r!(n-r)!}
 \]
+\vspace{4mm}
 
-Permutation: \[
-nP_r = \dfrac{n!}{(n-r)!}
-\]
-
-Combination: \[
-nC_r = \binom{n}{r}
-\]
-
-Distinct permutations:
+\textbf{Permutation}: \\
+Permutations are \textit{without} replacment.
 \[
-P = \dfrac{n!}{n_1! n_2! \dots n_k!}
+_nP_r = \dfrac{n!}{(n-r)!}
 \]
+
+\vspace{4mm}
+
+\textbf{Distinct permutations} (Number of unique arrangements):
+\[
+N = \dfrac{n!}{n_1! \hspace{2mm} n_2! \hspace{2mm} \dots \hspace{2mm} n_k!}
+\]
+where $n_1$, $n_2$, ..., $n_k$ are the counts for each category.
 
 \pagebreak
 
@@ -93,7 +97,7 @@ P(X \leq k) = \sum_{k=0}^{\lfloor x \rfloor} \binom{n}{k} p^k (1 - p)^{n-k}
 \section{Poisson Distribution}
 
 \textbf{PMF:} \[
-P(X = k) = \dfrac{e^{-\lambda}\lambda^k}{k!}, \quad k = 0, 1, 2, ...
+P(X = k) = \dfrac{e^{-\lambda}\lambda^k}{k!}, \quad k = 0, 1, 2, \ldots
 \]
 \textbf{Mean:} $E[X] = \lambda$ \quad
 \textbf{Variance:} $\sigma^2 = \lambda$
@@ -102,7 +106,7 @@ P(X = k) = \dfrac{e^{-\lambda}\lambda^k}{k!}, \quad k = 0, 1, 2, ...
 \section{Discrete Uniform Distribution}
 
 \textbf{PMF:} \[
-P(X = x_i) = \dfrac{1}{n}, \quad i = 1, 2, ..., n
+P(X = x_i) = \dfrac{1}{n}, \quad i = 1, 2, \ldots, n
 \]
 \textbf{Mean:} $E[X] = \dfrac{n + 1}{2}$ \quad
 \textbf{Variance:} $\sigma^2 = \dfrac{n^2 - 1}{12}$
@@ -111,7 +115,7 @@ P(X = x_i) = \dfrac{1}{n}, \quad i = 1, 2, ..., n
 \section{Geometric Distribution}
 
 \textbf{PMF:} \[
-P(X = k) = (1 - p)^{k - 1} p, \quad k = 1, 2, ...
+P(X = k) = (1 - p)^{k - 1} p, \quad k = 1, 2, \ldots
 \]
 \textbf{Mean:} $E[X] = \dfrac{1}{p}$ \quad
 \textbf{Variance:} $\sigma^2 = \dfrac{1 - p}{p^2}$
