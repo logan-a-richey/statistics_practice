@@ -1,4 +1,4 @@
-\documentclass[11pt]{article}
+\documentclass[10pt]{article}
 \usepackage[margin=1in]{geometry}
 \usepackage{multicol}
 \usepackage{enumitem}
@@ -334,69 +334,226 @@ which is the standard hypergeometric variance formula.
 
 \section{Negative Binomial: Mean and Variance from MGF}
 
-\subsection{First moment and Mean}
-Let's start by finding the mean:
+% \subsection{First moment and Mean}
+% Let's start by finding the mean:
+% \[
+% 	\mu_1' = \dfrac{d}{dt} M_X(t) \bigg|_{t=0} 
+% 	= \dfrac{d}{dt} \left( \dfrac{p}{1 - qe^t}^r \right) \bigg|_{t=0}
+% \]
+% \[
+% 	p^r \dfrac{d}{dt} (1 - qe^t) ^ {-r} \bigg|_{t=0}
+% \]
+% \[
+% 	p^r (-r)(1-qe^t)^{-r-1} (-qe^t) \bigg|_{t=0}
+% \]
+% \[
+% 	r (p^r) q p^{-r-1}
+% \]
+% \[
+% 	\boxed{E[X] =  \dfrac{rq}{p}}
+% \]
+% 
+% \subsection{Second moment and Variance}
+% \[
+% 	\mu_2' = \dfrac{d^2}{dt^2} M_X(t) \bigg|_{t=0} 
+% 	= \dfrac{d	}{dt} \dfrac{d}{dt} \left( \dfrac{p}{1 - qe^t} \right) ^ r \bigg|_{t=0}
+% \]
+% \[
+% 	r p^r \dfrac{d}{dt} \left[ (1-qe^t)^{-r-1} e^t \right] \bigg|_{t=0}
+% \]
+% \[
+% 	r p^r q \left[ (1 - qe^t) ^ {-r-1} e^t + e^t (-r-1) (1 - qe^t)^{-r-2} \right] \bigg|_{t=0}
+% \]
+% \[
+% 	r p^r q[ (p^{-r-1} + (r+1) p^{-r-2} q ]
+% \]
+% \[
+% 	r p^r q p^{-r-1} + r p^r q^2 (r + 1) p ^{-r-2}
+% \]
+% \[
+% 	\mu_2' = \dfrac{rq}{p} + r(r+1) \dfrac{q^2}{p^2} 
+% \]
+% \[
+% 	\mu_2 = \operatorname{Var}(X) = \mu_2' - \mu_1' 
+% 	= \dfrac{rq}{p} + r(r+1) \dfrac{q^2}{p^2} - \left( \dfrac{rq}{p} \right) ^2
+% \]
+% \[
+% 	\dfrac{rq}{p} \left[ [1 + (r+1) \dfrac{q}{p} - \dfrac{rq}{p} \right]
+% \]
+% \[
+% 	\dfrac{rq}{p} \left[ \dfrac{p + rq +q - rq}{p} \right]
+% \]
+% \[
+% 	\boxed{ \operatorname{Var}(X) = \dfrac{rq}{p^2} }
+% \]
+
+% Attempt 2:
+% Parameterization: X = number of failures before the r-th success.
+% PMF: P(X=k) = \binom{k+r-1}{k} p^r q^k, k = 0,1,2,..., q=1-p.
+
+\subsection{MGF and first moment}
+The MGF for the negative binomial (counting failures before the \(r\)-th success,
+with success probability \(p\) and \(q=1-p\)) is
 \[
-	\mu_1' = \dfrac{d}{dt} M_X(t) \bigg|_{t=0} 
-	= \dfrac{d}{dt} \left( \dfrac{p}{1 - qe^t}^r \right) \bigg|_{t=0}
-\]
-\[
-	p^r \dfrac{d}{dt} (1 - qe^t) ^ {-r} \bigg|_{t=0}
-\]
-\[
-	p^r (-r)(1-qe^t)^{-r-1} (-qe^t) \bigg|_{t=0}
-\]
-\[
-	r (p^r) q p^{-r-1}
-\]
-\[
-	\boxed{E[X] =  \dfrac{rq}{p}}
+    M_X(t) = \left(\frac{p}{1-qe^t}\right)^r
+    = p^r(1-qe^t)^{-r}, \qquad \text{for } |qe^t|<1.
 \]
 
-\subsection{Second moment and Variance}
+A compact way to differentiate is to write
 \[
-	\mu_2' = \dfrac{d^2}{dt^2} M_X(t) \bigg|_{t=0} 
-	= \dfrac{d	}{dt} \dfrac{d}{dt} \left( \dfrac{p}{1 - qe^t} \right) ^ r \bigg|_{t=0}
+    \ln M_X(t) = r\ln p - r\ln(1-qe^t).
+\]
+
+Then
+\[
+    \frac{M_X'(t)}{M_X(t)} = \frac{d}{dt}\ln M_X(t) = -r\cdot\frac{d}{dt}\ln(1-qe^t)
+    = -r\cdot\frac{-q e^t}{1-qe^t}
+    = \frac{rq e^t}{1-qe^t}.
+\]
+
+Hence
+\[
+    M_X'(t) = M_X(t)\cdot\frac{rq e^t}{1-qe^t}.
+\]
+    Evaluate at \(t=0\). Since \(M_X(0)=1\) and \(e^0=1\),
+\[
+    E[X]=M_X'(0)=\frac{rq}{1-q}=\frac{rq}{p}.
 \]
 \[
-	r p^r \dfrac{d}{dt} \left[ (1-qe^t)^{-r-1} e^t \right] \bigg|_{t=0}
+    \boxed{E[X]=\dfrac{rq}{p}}
+\]
+
+\subsection{Second moment and variance}
+Differentiate again. Let
+\[
+    A(t)=\frac{rq e^t}{1-qe^t},\qquad M_X'(t)=M_X(t)A(t).
+\]
+
+Then
+\[
+    M_X''(t)=\frac{d}{dt}\big(M_X(t)A(t)\big)=M_X(t)A(t)^2 + M_X(t)A'(t).
+\]
+
+So
+\[
+    M_X''(0)=A(0)^2 + A'(0),
+\]
+
+because \(M_X(0)=1\). Compute
+\[
+    A(0)=\frac{rq}{1-q}=\frac{rq}{p},
+    \qquad
+    A'(t)=\frac{rq e^t}{(1-qe^t)^2},
+\]
+
+thus
+\[
+    A'(0)=\frac{rq}{(1-q)^2}=\frac{rq}{p^2}.
+\]
+
+Therefore
+\[
+    E[X^2]=M_X''(0)=\left(\frac{rq}{p}\right)^2 + \frac{rq}{p^2}
+    = \frac{rq(rq+1)}{p^2}.
+\]
+
+Now compute the variance:
+\[
+    \operatorname{Var}(X)=E[X^2]-(E[X])^2
+    = \frac{rq(rq+1)}{p^2} - \left(\frac{rq}{p}\right)^2
+    = \frac{rq}{p^2}.
 \]
 \[
-	r p^r q \left[ (1 - qe^t) ^ {-r-1} e^t + e^t (-r-1) (1 - qe^t)^{-r-2} \right] \bigg|_{t=0}
-\]
-\[
-	r p^r q[ (p^{-r-1} + (r+1) p^{-r-2} q ]
-\]
-\[
-	r p^r q p^{-r-1} + r p^r q^2 (r + 1) p ^{-r-2}
-\]
-\[
-	\mu_2' = \dfrac{rq}{p} + r(r+1) \dfrac{q^2}{p^2} 
-\]
-\[
-	\mu_2 = \operatorname{Var}(X) = \mu_2' - \mu_1' 
-	= \dfrac{rq}{p} + r(r+1) \dfrac{q^2}{p^2} - \left( \dfrac{rq}{p} \right) ^2
-\]
-\[
-	\dfrac{rq}{p} \left[ [1 + (r+1) \dfrac{q}{p} - \dfrac{rq}{p} \right]
-\]
-\[
-	\dfrac{rq}{p} \left[ \dfrac{p + rq +q - rq}{p} \right]
-\]
-\[
-	\boxed{ \operatorname{Var}(X) = \dfrac{rq}{p^2} }
+    \boxed{\operatorname{Var}(X)=\dfrac{rq}{p^2}}
 \]
 
 \pagebreak
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\section{Negative HyperGeometric: Mean and Variance from MGF}
-\subsection{MGF}
-TODO
-\subsection{Moments}
-TODO
-\subsection{Variance}
-TODO
+\section{Negative Hypergeometric (Failures before the $r$-th success)}
+
+% Model: Population of size N, containing K successes and N-K failures.
+% Draw without replacement until the r-th success is observed.
+% Let X = number of failures observed before the r-th success.
+% Support: X = 0,1,2,...,N-K (but truncated by feasibility when r > K, etc.)
+
+\subsection{Setup and goal}
+Population size \(N\), successes \(K\), failures \(N-K\). We draw items without replacement until we have observed \(r\) successes (\(1 \le r \le K\)). Let
+\[
+X = \text{number of failures observed before the \(r\)-th success.}
+\]
+We derive \(E[X]\) and \(\operatorname{Var}(X)\) using indicator variables.
+
+\subsection{Indicator decomposition}
+Label the \(N-K\) failures in the population and for each failure \(j\) define the indicator
+\[
+I_j = \begin{cases}
+1 & \text{if failure } j \text{ is drawn before the \(r\)-th success},\\[4pt]
+0 & \text{otherwise.}
+\end{cases}
+\]
+Then
+\[
+X=\sum_{j=1}^{\,N-K} I_j.
+\]
+By linearity,
+\[
+E[X] = \sum_{j=1}^{N-K} E[I_j] = (N-K)\,P(\text{a fixed failure is before the \(r\)-th success}).
+\]
+
+\subsection{Single-indicator probability}
+Consider one fixed failure and the \(K\) successes. In a random ordering of these \(K+1\) items the failure is equally likely to occupy any of the \(K+1\) positions. The failure appears before the \(r\)-th success iff its position among these \(K+1\) items is \(\le r\). Hence
+\[
+P(I_j=1) = \frac{r}{K+1}.
+\]
+Therefore
+\[
+\boxed{E[X] = (N-K)\frac{r}{K+1} = \dfrac{r(N-K)}{K+1}.}
+\]
+
+\pagebreak
+
+\subsection{Pair probability and covariance}
+For two distinct failures \(i\neq j\) consider these two failures together with the \(K\) successes (total \(K+2\) items). Both failures are before the \(r\)-th success exactly when, among the \(K+2\) items, the later failure (the one with larger position) lies at position \(\le r+1\). Counting admissible placements gives the closed form
+\[
+P(I_i=1,I_j=1) = \frac{r(r+1)}{(K+1)(K+2)}.
+\]
+Let \(p:=P(I_j=1)=\dfrac{r}{K+1}\). Then the covariance between two distinct failure indicators is
+\[
+\operatorname{Cov}(I_i,I_j)
+= P(I_i=1,I_j=1) - p^2
+= \frac{r(r+1)}{(K+1)(K+2)} - \frac{r^2}{(K+1)^2}
+= \frac{r(K-r+1)}{(K+1)^2(K+2)}.
+\]
+
+\subsection{Assemble the variance}
+Use
+\[
+\operatorname{Var}(X) = \sum_{j=1}^{N-K}\operatorname{Var}(I_j) + 2\sum_{1\le i<j\le N-K}\operatorname{Cov}(I_i,I_j).
+\]
+We have \(\operatorname{Var}(I_j)=p(1-p)\) and there are \(\binom{N-K}{2}\) equal covariance terms. Substitute and simplify:
+\[
+\begin{aligned}
+\operatorname{Var}(X)
+&= (N-K)\,p(1-p) + 2\binom{N-K}{2}\,\operatorname{Cov}(I_i,I_j)\\[6pt]
+&= (N-K)\frac{r}{K+1}\!\left(1-\frac{r}{K+1}\right)
++ (N-K)(N-K-1)\frac{r(K-r+1)}{(K+1)^2(K+2)}.
+\end{aligned}
+\]
+This simplifies (after algebra) to the common closed form
+\[
+\boxed{\operatorname{Var}(X)
+= \dfrac{r (N-K)(N+1)(K-r+1)}{(K+1)^2 (K+2)}.}
+\]
+
+\subsection{Final Results}
+\[
+\boxed{E[X]=\dfrac{r(N-K)}{K+1}, \qquad 
+\operatorname{Var}(X)=\dfrac{r (N-K)(N+1)(K-r+1)}{(K+1)^2 (K+2)}.}
+\]
+
+% Remark: Another useful quantity is T = total draws needed to get r successes: T = X + r.
+% Then E[T] = r\frac{N+1}{K+1} and Var(T) = Var(X) (same variance as X).
 
 \pagebreak
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -462,43 +619,6 @@ The variance of the Rademacher distrubution is 1.
 \pagebreak
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Zipf Distribution}
-
-The Zipf distribution does not have a MGF, because the series for the MGF does not converge for any interval around zero. 
-While it does not have a MGF, it does have a probability generating function (PGF) defined in terms of the polylogarithm function.
-
-\begin{itemize}
-    \item
-    \textbf{Why the MGF does not exist:} 
-        The definition of the MGF for the Zipf distribution involves an infinite series, and this series does not converge on an open interval that includes $0$. 
-        For a MGF to exist, the series must converge in a neighborhood of $0$.
-    \item
-    \textbf{The PGF exists:}
-        The Zipf distribution does have a probability generating function (PGF), which is defined as $E[z^x]$.
-    \item
-    \textbf{PGF Formula:}
-        The PGF for the Zipf distribution is given by:
-        \begin {center}
-        	$ P(z) = \dfrac{Li_a(z)}{Li_a(1)} $ \quad where $Li_a(z)$ is the polylogarithm function.
-        	\end{center}
-        	
-        
-\end{itemize}
-
-The polylogarithm function is given by:
-\[
-    Li_s(z) = \sum\limits_{n=1}^\infty \dfrac{z^n}{n^s}
-\]
-\[
-    Li_s(z) = \dfrac{1}{ \Gamma(s)} \int_0^\infty \dfrac{t^{s - 1}}{\frac{e^t}{z} - 1} dt
-\]
-
-The Zipf distribution is used often, particularly for analyzing patterns in fields like linguistics, internet traffic, city populations, and economics, where a few high-frequency items dominate a much larger number of low-frequency ones. It's a fundamental concept for understanding how rank and frequency relate in many natural and human-made systems.
-
-\pagebreak
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Exponential Distribution: Mean and Variance from MGF}
 
 \subsection{PDF and MGF}
@@ -546,8 +666,42 @@ Variance:
     \boxed{E[X] = \frac{1}{\lambda}, \qquad \operatorname{Var}(X) = \frac{1}{\lambda^2}}
 \]
 
-% \pagebreak
+\pagebreak
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Zipf Distribution}
+
+The Zipf distribution does not have a MGF, because the series for the MGF does not converge for any interval around zero. 
+While it does not have a MGF, it does have a probability generating function (PGF) defined in terms of the polylogarithm function.
+
+\begin{itemize}
+    \item
+    \textbf{Why the MGF does not exist:} 
+        The definition of the MGF for the Zipf distribution involves an infinite series, and this series does not converge on an open interval that includes $0$. 
+        For a MGF to exist, the series must converge in a neighborhood of $0$.
+    \item
+    \textbf{The PGF exists:}
+        The Zipf distribution does have a probability generating function (PGF), which is defined as $E[z^x]$.
+    \item
+    \textbf{PGF Formula:}
+        The PGF for the Zipf distribution is given by:
+        \begin {center}
+        	$ P(z) = \dfrac{ \operatorname{Li}_a(z)}{ \operatorname{Li}_a(1)} $ 
+        	\quad where $\operatorname{Li}_a(z)$ is the polylogarithm function.
+        	\end{center}
+\end{itemize}
+
+The polylogarithm function is given by:
+\[
+    \operatorname{Li}_s(z) = \sum\limits_{n=1}^\infty \dfrac{z^n}{n^s}
+\]
+\[
+    \operatorname{Li}_s(z) = \dfrac{1}{ \Gamma(s)} \int_0^\infty \dfrac{t^{s - 1}}{\frac{e^t}{z} - 1} dt
+\]
+
+The Zipf distribution is used often, particularly for analyzing patterns in fields like linguistics, internet traffic, city populations, and economics, where a few high-frequency items dominate a much larger number of low-frequency ones. It's a fundamental concept for understanding how rank and frequency relate in many natural and human-made systems.
+
+\pagebreak
 
 \end{document}
 
