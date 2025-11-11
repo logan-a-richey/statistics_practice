@@ -207,11 +207,43 @@ Thus,
 \section{Geometric: Mean and Variance from MGF}
 
 \subsection{MGF}
-TODO
+The mean, or expected value, is given by the sum of each possible outcome multiplied by its probability:
+\[
+    E[X] = \sum\limits_{x=1}^\infty x \cdot p(1 - p)^{x - 1}
+\]
+
+This summation can be rewritten by factoring out $p$ and manipulating the series. 
+Using the formula for the sum of an infinite geometric series and differentiation with respect to the common ratio, the expected value simplifies to:
+\[
+    E[X] = \sum\limits_{x=1}^\infty x \cdot p(1 - p)^{x - 1} = \dfrac{1}{p}
+\]
+Therefore, the mean is
+\[
+	\boxed{E[X] = \dfrac{1}{p}}
+\]
+
 \subsection{Moments}
-TODO
+The variance can be calculated using:
+\[
+    Var(X) = E[X^2] - E[X]^2
+\]
+Finding the second moment, $E[X^2]$:
+\[
+    E[X^2] = \sum\limits_{x=1}^\infty x^2 \cdot p (1-p)^{x-1}
+\]
+\[
+    E[X^2] = \dfrac{1-p}{p^2}
+\]
+
 \subsection{Variance}
-TODO
+Using the first and second moments, we can find the variance.
+\[
+    Var(X) = \dfrac{1-p}{p^2} - (\dfrac{1}{p})^2 = \dfrac{1-p-1}{p^2} = \dfrac{-p}{p^2} = \dfrac{1-p}{p^2}
+\]
+Therefore, the variance is:
+\[
+	\boxed{\sigma^2 = \dfrac{1-p}{p^2}}
+\]
 
 \pagebreak
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -282,9 +314,9 @@ Calculate the expectation: Substitute these values into the definition:
 	M(t) = e^{-t}(\dfrac{1}{2}) + e^{t}(\dfrac{1}{2})
 \]
 \[
-	M(t) = \dfrac{1}{2} (e^{t} + e^{-1})
+	M(t) = \dfrac{1}{2} (e^{t} + e^{-t})
 \]
-Note that $\dfrac{e^{t} + e^{-1} }{2}$ is the definition of the hyperbolic cosine function, $\cosh(t)$. Thus, $M(t) = \cosh(t)$. \\
+Note that $\dfrac{e^{t} + e^{-t} }{2}$ is the definition of the hyperbolic cosine function, $\cosh(t)$. Thus, $M(t) = \cosh(t)$. \\
 
 
 \subsection{Using the MGF to find moments}
@@ -295,6 +327,7 @@ Note that $\dfrac{e^{t} + e^{-1} }{2}$ is the definition of the hyperbolic cosin
 \[
 	M'(0) = \sinh(0) = 0
 \]
+
 The mean of the Rademacher distribution is $0$.
 
 \textbf{Variance}: The variance is found using the second derivative.
@@ -377,6 +410,7 @@ TODO
 
 \subsection{Variance}
 TODO 
+
 
 % \pagebreak
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
